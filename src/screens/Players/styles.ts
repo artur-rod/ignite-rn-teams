@@ -25,7 +25,7 @@ export const TeamsHeader = styled.View`
 
 export const PlayersCount = styled.Text`
   ${({ theme }) => css`
-    color: ${theme.COLORS.GRAY_200};
+    color: ${theme.COLORS.GRAY_300};
     font-size: ${theme.FONT_SIZE.SM}px;
     font-family: ${theme.FONT_FAMILY.BOLD};
   `};

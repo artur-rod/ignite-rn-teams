@@ -12,7 +12,7 @@ import { Container, Form, PlayersCount, TeamsHeader } from "./styles";
 
 export function Players() {
   const [team, setTeam] = useState("Time A");
-  const [players, setPlayers] = useState(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]);
+  const [players, setPlayers] = useState([]);
 
   return (
     <Container>
