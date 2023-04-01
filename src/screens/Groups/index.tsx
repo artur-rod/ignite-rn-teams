@@ -20,6 +20,7 @@ export function Groups() {
         keyExtractor={item => item}
         renderItem={({ item }) => <GroupCard title={item} onPress={() => {}} />}
         contentContainerStyle={!groups.length && { flex: 1 }}
+        showsVerticalScrollIndicator={false}
         ListEmptyComponent={() =>
           <EmptyList
             showIcon

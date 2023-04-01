@@ -1,6 +1,6 @@
 import { Loading } from "@components/Loading";
 import { Roboto_400Regular, Roboto_700Bold, useFonts } from "@expo-google-fonts/roboto";
-import { NewGroup } from "@screens/NewGroup";
+import { Players } from "@screens/Players";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components";
 import theme from "./src/theme";
@@ -11,7 +11,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar style="light" backgroundColor="transparent" translucent />
-      {fontsLoaded ? <NewGroup /> : <Loading />}
+      {fontsLoaded ? <Players /> : <Loading />}
     </ThemeProvider>
   );
 }
