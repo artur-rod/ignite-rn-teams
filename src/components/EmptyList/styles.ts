@@ -9,7 +9,7 @@ export const Container = styled.View`
 
 export const Icon = styled(UsersThree).attrs(({ theme }) => ({
   color: theme.COLORS.GREEN_700,
-  size: 32
+  size: 56
 }))`
   margin-bottom: 10px;
 `;
