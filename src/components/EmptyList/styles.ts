@@ -1,5 +1,5 @@
 import { UsersThree } from "phosphor-react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Container = styled.View`
   flex: 1;
@@ -15,14 +15,18 @@ export const Icon = styled(UsersThree).attrs(({ theme }) => ({
 `;
 
 export const Title = styled.Text`
-  font-size: ${({ theme }) => theme.FONT_SIZE.MD}px;
-  font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
-  color: ${({ theme }) => theme.COLORS.GRAY_200};
-  margin-bottom: 5px;
+  ${({ theme }) => css`
+    font-size: ${theme.FONT_SIZE.MD}px;
+    font-family: ${theme.FONT_FAMILY.BOLD};
+    color: ${theme.COLORS.GRAY_200};
+    margin-bottom: 5px;
+  `};
 `;
 
 export const Subtitle = styled.Text`
-  font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
-  font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
-  color: ${({ theme }) => theme.COLORS.GRAY_300};
+  ${({ theme }) => css`
+    font-size: ${theme.FONT_SIZE.SM}px;
+    font-family: ${theme.FONT_FAMILY.REGULAR};
+    color: ${theme.COLORS.GRAY_300};
+  `};
 `;
