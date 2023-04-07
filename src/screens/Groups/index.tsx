@@ -6,7 +6,7 @@ import { Highlight } from "@components/Highlight";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { getAllGroups } from "@storage/group/getAllGroups";
 import { useCallback, useState } from "react";
-import { FlatList } from "react-native";
+import { Alert, FlatList } from "react-native";
 import { Container } from "./styles";
 
 export function Groups() {
@@ -23,6 +23,7 @@ export function Groups() {
       const data = await getAllGroups();
       setGroups(data);
     } catch (err) {
+      Alert.alert("Turmas", "Não foi possível carregar as turmas");
       console.log(err);
     }
   }

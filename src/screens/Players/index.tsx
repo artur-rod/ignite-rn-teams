@@ -13,8 +13,8 @@ import { getPlayerByGroupAndTeam } from "@storage/player/getPlayerByGroupAndTeam
 import { playerAddByGroup } from "@storage/player/playerAddByGroup";
 import { removePlayer } from "@storage/player/removePlayer";
 import { AppError } from "@utils/AppError";
-import { useEffect, useState } from "react";
-import { Alert, FlatList, Keyboard } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { Alert, FlatList, TextInput } from "react-native";
 import { Container, Form, PlayersCount, TeamsHeader } from "./styles";
 
 type RouteParams = {
@@ -25,6 +25,8 @@ export function Players() {
   const [team, setTeam] = useState("Time A");
   const [newPlayerName, setNewPlayerName] = useState("");
   const [players, setPlayers] = useState<PlayerStorageDTO[]>([]);
+
+  const newPlayerNameInputRef = useRef<TextInput>(null)
 
   const { params } = useRoute();
   const { group } = params as RouteParams;
@@ -56,7 +58,8 @@ export function Players() {
       await playerAddByGroup(newPlayer, group);
 
       setNewPlayerName("");
-      Keyboard.dismiss();
+      newPlayerNameInputRef.current?.blur();
+      // Keyboard.dismiss();
       await fetchPlayersByTeam();
     } catch (err) {
       if (err instanceof AppError) {
@@ -119,6 +122,7 @@ export function Players() {
           value={newPlayerName}
           onChangeText={setNewPlayerName}
           onSubmitEditing={handleAddPLayer}
+          inputRef={newPlayerNameInputRef}
           returnKeyType="done"
         />
         <ButtonIcon icon="add" onPress={handleAddPLayer} />
