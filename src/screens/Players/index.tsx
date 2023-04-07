@@ -5,6 +5,7 @@ import { Filter } from "@components/Filter";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { Input } from "@components/Input";
+import { Loading } from "@components/Loading";
 import { PlayerCard } from "@components/PlayerCard";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { removeGroup } from "@storage/group/removeGroup";
@@ -22,6 +23,7 @@ type RouteParams = {
 };
 
 export function Players() {
+  const [isLoading, setIsLoading] = useState(true)
   const [team, setTeam] = useState("Time A");
   const [newPlayerName, setNewPlayerName] = useState("");
   const [players, setPlayers] = useState<PlayerStorageDTO[]>([]);
@@ -35,11 +37,14 @@ export function Players() {
 
   async function fetchPlayersByTeam() {
     try {
+      setIsLoading(true);
       const player = await getPlayerByGroupAndTeam(group, team);
       setPlayers(player);
     } catch (err) {
       Alert.alert("Pessoas", "Não foi possível listar as pessoas desse time");
       console.log(err);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -84,7 +89,7 @@ export function Players() {
 
   async function handleRemoveGroup() {
     try {
-      Alert.alert("Remover grupo", "Deseja remover o grupo?", [
+      Alert.alert("Remover turma", "Deseja remover a turma?", [
         {
           text: "Não"
         },
@@ -98,7 +103,7 @@ export function Players() {
         }
       ]);
     } catch (err) {
-      Alert.alert("Remover grupo", "Não foi possível remover esse grupo");
+      Alert.alert("Remover turma", "Não foi possível remover essa turma");
       console.log(err);
     }
   }
@@ -141,7 +146,9 @@ export function Players() {
         </PlayersCount>
       </TeamsHeader>
 
-      <FlatList
+      { isLoading 
+      ? <Loading /> 
+      : <FlatList
         data={players}
         keyExtractor={item => item.name}
         renderItem={({ item }) =>
@@ -155,6 +162,7 @@ export function Players() {
             message="Cadastre os jogadores de cada time"
           />}
       />
+        }
 
       <Button text="Remover turma" type="SECONDARY" onPress={handleRemoveGroup} />
     </Container>
